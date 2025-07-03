@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>兔赤無料印調</title>
+  <title>兔赤無料</title>
   <style>
     html, body {
       margin: 0;
@@ -43,32 +43,42 @@
       animation: subtitleIn 1.2s ease-out forwards;
     }
     @keyframes subtitleIn {
-      0% {
-        opacity: 0;
-        transform: translateY(100px) scale(0.9);
-      }
-      60% {
-        opacity: 1;
-        transform: translateY(-10px) scale(1.05);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(100px) scale(0.9); }
+      60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
+
     .rainbow-glow {
       display: inline-block;
       background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
       background-size: 1400% 1400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: rainbowFlow 8s linear infinite;
-      text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6);
+      animation: rainbowFlow 3s linear infinite;
     }
     @keyframes rainbowFlow {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
+
+    .flash-frame {
+      padding: 2rem;
+      border: 10px solid transparent;
+      border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+      border-image-slice: 1;
+      animation: borderFlash 5s linear infinite;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    }
+    @keyframes borderFlash {
+      0% {
+        border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+      }
+      100% {
+        border-image-source: linear-gradient(450deg, red, orange, yellow, green, blue, indigo, violet, red);
+      }
+    }
+
     .logo-container {
       position: relative;
       display: flex;
@@ -95,10 +105,7 @@
       z-index: 2;
     }
     .logo-emoji { margin: 0 0.3em; }
-    .sparkle {
-      animation: sparkleTwinkle 1.5s ease-in-out infinite;
-      display: inline-block;
-    }
+    .sparkle { animation: sparkleTwinkle 1.5s ease-in-out infinite; display: inline-block; }
     .glow-ring {
       position: absolute;
       width: 200px;
@@ -128,20 +135,21 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
     .highlight-pop {
-      font-size: 1.4em;
-      color: #fff;
-      font-weight: 900;
-      text-shadow: 0 0 8px #ffffff, 0 0 20px #ffccff;
-      animation: popIn 0.6s ease-out;
+      font-size: clamp(3rem, 9vw, 6rem);
+      font-weight: 1000;
+      animation: popBoom 1s ease-out;
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      70% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
+    @keyframes popBoom {
+      0% { transform: scale(0.3) rotate(-30deg); opacity: 0; }
+      60% { transform: scale(1.3) rotate(8deg); opacity: 1; }
+      80% { transform: scale(0.9) rotate(-3deg); }
+      100% { transform: scale(1) rotate(0); }
     }
+
     .warning-text { text-align: center; line-height: 1.4; }
     .warning-red {
       color: #ff4d4d;
@@ -175,9 +183,11 @@
 <body>
   <div class="container">
     <section class="card">
-      <h1 class="normal-text subtitle-entry">
-        <span class="rainbow-glow">說點兔赤<br>ooc致歉</span>
-      </h1>
+      <div class="flash-frame">
+        <h1 class="normal-text subtitle-entry">
+          <span class="rainbow-glow">說點兔赤</span>
+        </h1>
+      </div>
     </section>
     <section class="card">
       <div class="logo-container">
@@ -190,9 +200,9 @@
     </section>
     <section class="card">
       <h1 class="normal-text">
-        Threads、噗浪<br>
-	賴賴 @salala_lai<br>
-        <span class="highlight-pop">首本兔赤無料</span>
+        threads、噗浪 賴賴<br>
+        @salala_lai<br>
+        <span class="highlight-pop rainbow-glow">首本兔赤無料</span>
       </h1>
     </section>
     <section class="card">
@@ -205,8 +215,8 @@
     <section class="card">
       <h1 class="normal-text">
         請填寫印量調查表單<br>
-        協助估算數量<br>
-        ✨ 感謝支持 ✨<br>
+        協助估算需求數量<br>
+        ✨ 感謝支持 ✨<br><br>
         <a href="https://forms.gle/your-google-form-link" target="_blank" style="color:#ffd700; text-decoration: underline; font-weight:bold; font-size: 0.8em;">☝️點我填寫✌️</a>
       </h1>
     </section>
