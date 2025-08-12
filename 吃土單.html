@@ -20,22 +20,49 @@ fetch('吃土單.csv')
   .then(text => {
     const lines = text.trim().split(/\r?\n/); // 分行
     const table = document.createElement('table');
-    lines.forEach((line, index) => {
-      const row = document.createElement('tr');
+
+    lines.forEach((line, rowIndex) => {
+      const tr = document.createElement('tr');
       const cells = line.split(',');
-      cells.forEach(cell => {
-        const cellElem = document.createElement(index === 0 ? 'th' : 'td');
-        cellElem.textContent = cell.trim();
-        row.appendChild(cellElem);
+
+      cells.forEach((raw, colIndex) => {
+        const isHeader = rowIndex === 0;
+        const isLastCol = colIndex === cells.length - 1;
+        const cell = (isHeader ? document.createElement('th') : document.createElement('td'));
+        const value = raw.trim();
+
+        // 只有「資料列的最後一欄」要做連結
+        if (!isHeader && isLastCol && looksLikeLink(value)) {
+          const a = document.createElement('a');
+          a.href = value;
+          a.textContent = value;        // 如果想顯示別的文字可改這裡
+          a.target = '_blank';
+          a.rel = 'noopener';
+          cell.appendChild(a);
+        } else {
+          cell.textContent = value;
+        }
+
+        tr.appendChild(cell);
       });
-      table.appendChild(row);
+
+      table.appendChild(tr);
     });
-    document.getElementById('table-container').innerHTML = '';
-    document.getElementById('table-container').appendChild(table);
+
+    const wrap = document.getElementById('table-container');
+    wrap.innerHTML = '';
+    wrap.appendChild(table);
   })
   .catch(err => {
     document.getElementById('table-container').textContent = '讀取失敗：' + err;
   });
+
+function looksLikeLink(s) {
+  // 很鬆的判斷：支援 http/https、mailto、相對路徑（/ 或 ./ 或 ../ 開頭）
+  return /^https?:\/\/\S+/i.test(s) ||
+         /^mailto:\S+@\S+/.test(s) ||
+         /^(\.|\.{2}|\/)/.test(s);
+}
 </script>
 
 </body>
