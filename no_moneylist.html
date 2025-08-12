@@ -15,7 +15,7 @@
 <div id="table-container">讀取中...</div>
 
 <script>
-fetch('吃土單.csv')
+fetch('no_money.csv')
   .then(res => res.text())
   .then(text => {
     const lines = text.trim().split(/\r?\n/); // 分行
@@ -67,5 +67,6 @@ function looksLikeLink(s) {
 
 </body>
 </html>
+
 
 
