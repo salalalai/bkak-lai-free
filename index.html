@@ -186,12 +186,30 @@
 .highlight a:hover {
   text-decoration: underline;
 }
+
+.corner-link {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+.corner-link:hover {
+  background: rgba(255,255,255,0.3);
+}	  
   </style>
 </head>
 <body>
   <div class="container">
     <div class="marquee top"><span>賴賴　賴賴　賴賴　賴賴　賴賴　賴賴</span></div>
     <section class="card active">
+	  <a href="no_moneylist.html" class="corner-link" target="_blank">📄 吃土單</a>
       <h1 class="normal-text">
         <span class="gold-text">說點兔赤<br>無料領取感謝</span>
       </h1>
@@ -289,6 +307,7 @@
   </script>
 </body>
 </html>
+
 
 
 
