@@ -10,7 +10,7 @@
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    font-size: clamp(16px, 2vw, 20px); /* 自適應字體 */
+    font-size: 22px; /* 預設字體放大 */
   }
   h2 {
     color: #ffd966;
@@ -27,10 +27,10 @@
   }
   th, td {
     border: 1px solid #444;
-    padding: 8px 12px;
+    padding: 10px 14px;
     text-align: left;
     word-break: break-word;
-    font-size: clamp(15px, 1.8vw, 18px); /* 自適應表格字體 */
+    font-size: 24px; /* 表格字體加大 */
   }
   th {
     background-color: #333;
@@ -53,12 +53,15 @@
     text-decoration: underline;
     color: #81d4fa;
   }
+  /* 手機調整字體與間距 */
   @media (max-width: 600px) {
     body {
       padding: 10px;
+      font-size: 22px; /* 手機也放大 */
     }
     th, td {
-      padding: 6px 8px;
+      padding: 8px 10px;
+      font-size: 16px;
     }
   }
 </style>
@@ -72,7 +75,7 @@
 fetch('no_money.csv')
   .then(res => res.text())
   .then(text => {
-    const lines = text.trim().split(/\r?\n/);
+    const lines = text.trim().split(/\r?\n/); // 分行
     const table = document.createElement('table');
 
     lines.forEach((line, rowIndex) => {
@@ -83,10 +86,9 @@ fetch('no_money.csv')
         const isHeader = rowIndex === 0;
         const isLastCol = colIndex === cells.length - 1;
         const cell = document.createElement(isHeader ? 'th' : 'td');
+        const value = raw.trim();
 
-        // 移除前後空格 + 壓縮多個空格為單一空格
-        const value = raw.trim().replace(/\s+/g, ' ');
-
+        // 只有「資料列的最後一欄」要做連結
         if (!isHeader && isLastCol && looksLikeLink(value)) {
           const a = document.createElement('a');
           a.href = value;
