@@ -4,9 +4,63 @@
 <meta charset="UTF-8">
 <title>賴賴的吃土單</title>
 <style>
-  table { border-collapse: collapse; margin-top: 20px; }
-  th, td { border: 1px solid #ccc; padding: 6px 10px; }
-  th { background: #f2f2f2; }
+  body {
+    background-color: #1e1e1e;
+    color: #eaeaea;
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  h2 {
+    color: #ffd966;
+    margin-bottom: 10px;
+  }
+  #table-container {
+    overflow-x: auto; /* 小螢幕可左右滑動 */
+  }
+  table {
+    border-collapse: collapse;
+    min-width: 600px;
+    width: 100%;
+    background-color: #2a2a2a;
+  }
+  th, td {
+    border: 1px solid #444;
+    padding: 8px 12px;
+    text-align: left;
+    word-break: break-word;
+  }
+  th {
+    background-color: #333;
+    color: #ffdd88;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  tr:nth-child(even) {
+    background-color: #242424;
+  }
+  tr:hover {
+    background-color: #383838;
+  }
+  a {
+    color: #4fc3f7;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: #81d4fa;
+  }
+  /* 手機調整字體與間距 */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+    th, td {
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -28,14 +82,14 @@ fetch('no_money.csv')
       cells.forEach((raw, colIndex) => {
         const isHeader = rowIndex === 0;
         const isLastCol = colIndex === cells.length - 1;
-        const cell = (isHeader ? document.createElement('th') : document.createElement('td'));
+        const cell = document.createElement(isHeader ? 'th' : 'td');
         const value = raw.trim();
 
         // 只有「資料列的最後一欄」要做連結
         if (!isHeader && isLastCol && looksLikeLink(value)) {
           const a = document.createElement('a');
           a.href = value;
-          a.textContent = '宣傳文超連結';        // 如果想顯示別的文字可改這裡
+          a.textContent = '宣傳文超連結';
           a.target = '_blank';
           a.rel = 'noopener';
           cell.appendChild(a);
@@ -58,7 +112,6 @@ fetch('no_money.csv')
   });
 
 function looksLikeLink(s) {
-  // 很鬆的判斷：支援 http/https、mailto、相對路徑（/ 或 ./ 或 ../ 開頭）
   return /^https?:\/\/\S+/i.test(s) ||
          /^mailto:\S+@\S+/.test(s) ||
          /^(\.|\.{2}|\/)/.test(s);
@@ -67,6 +120,3 @@ function looksLikeLink(s) {
 
 </body>
 </html>
-
-
-
