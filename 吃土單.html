@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>讀取 吃土單</title>
+<style>
+  table { border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; }
+  th { background: #f2f2f2; }
+</style>
+</head>
+<body>
+
+<h2>吃土單 → 表格</h2>
+<div id="table-container">讀取中...</div>
+
+<script>
+fetch('吃土單.txt')
+  .then(res => res.text())
+  .then(text => {
+    const lines = text.trim().split(/\r?\n/); // 分行
+    const table = document.createElement('table');
+    lines.forEach((line, index) => {
+      const row = document.createElement('tr');
+      const cells = line.split(',');
+      cells.forEach(cell => {
+        const cellElem = document.createElement(index === 0 ? 'th' : 'td');
+        cellElem.textContent = cell.trim();
+        row.appendChild(cellElem);
+      });
+      table.appendChild(row);
+    });
+    document.getElementById('table-container').innerHTML = '';
+    document.getElementById('table-container').appendChild(table);
+  })
+  .catch(err => {
+    document.getElementById('table-container').textContent = '讀取失敗：' + err;
+  });
+</script>
+
+</body>
+</html>
