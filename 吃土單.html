@@ -35,7 +35,7 @@ fetch('吃土單.csv')
         if (!isHeader && isLastCol && looksLikeLink(value)) {
           const a = document.createElement('a');
           a.href = value;
-          a.textContent = value;        // 如果想顯示別的文字可改這裡
+          a.textContent = '宣傳文超連結';        // 如果想顯示別的文字可改這裡
           a.target = '_blank';
           a.rel = 'noopener';
           cell.appendChild(a);
@@ -67,3 +67,4 @@ function looksLikeLink(s) {
 
 </body>
 </html>
+
